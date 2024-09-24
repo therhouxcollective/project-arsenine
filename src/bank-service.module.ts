@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { V1Module } from './v1/v1.module';
 import { IdentityModule } from './identity/identity.module';
 import { MessengerModule } from './messenger/messenger.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { BankingModule } from './banking/banking.module';
 import * as path from 'path';
 
 @Module({
-  imports: [V1Module, IdentityModule, MessengerModule, ConfigModule.forRoot({
-    envFilePath: path.resolve(__dirname, '.env')
+  imports: [IdentityModule, MessengerModule, BankingModule, ConfigModule.forRoot({
+    envFilePath: path.resolve(__dirname, '.env'),
+    isGlobal: true
   }), TypeOrmModule.forRootAsync({
     imports: [ConfigModule],
     inject: [ConfigService],
@@ -23,11 +23,9 @@ import * as path from 'path';
       database: configService.get('DATABASE_NAME'),
       autoLoadEntities: true,
       logging: true,
-      synchronize: false,
+      synchronize: true,
     }),
   })
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
-export class AppModule { }
+export class BankServiceModule { }

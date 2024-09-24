@@ -1,20 +1,28 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { FusionAuthService } from './services/fusion-auth/fusion-auth.service';
+import { AuthService } from './services/auth.service';
+import { ConfigModule } from '@nestjs/config';
+import { AuthController } from './controller/auth.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserEntity } from './entities/user.entity';
+import { LoginEntity } from './entities/login.entity';
 
 @Module({
-  providers: [FusionAuthService],
+  providers: [AuthService],
   imports: [
+    ConfigModule,
+    TypeOrmModule.forFeature([UserEntity, LoginEntity]),
     ClientsModule.register([
       {
-        name: 'auth_service',
+        name: 'banking',
         transport: Transport.NATS,
         options: {
           servers: ['nats://localhost:4222'],
-        },
+          
+        }
       },
     ]),
   ],
-  controllers: [],
+  controllers: [AuthController],
 })
 export class IdentityModule {}
