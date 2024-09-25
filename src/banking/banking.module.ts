@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { BankingService } from './services/banking.service';
-import { ClientsModule, Transport } from '@nestjs/microservices';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BankingController } from './banking/banking.controller';
+import { BankingController } from './controllers/banking.controller';
 import { StatementEntity } from './entities/statement.entity';
 import { MessengerModule } from 'src/messenger/messenger.module';
 
@@ -10,18 +9,9 @@ import { MessengerModule } from 'src/messenger/messenger.module';
   imports: [
     MessengerModule,
     TypeOrmModule.forFeature([StatementEntity]),
-    ClientsModule.register([
-      {
-        name: 'banking',
-        transport: Transport.NATS,
-        options: {
-          servers: ['nats://localhost:4222'],
-          
-        }
-      },
-    ]),
+    MessengerModule
   ],
   providers: [BankingService],
   controllers: [BankingController]
 })
-export class BankingModule {}
+export class BankingModule { }

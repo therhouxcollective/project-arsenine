@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { MessagesController } from './controller/messages/messages.controller';
+import { MessagesController } from './controller/messages.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MessageLogEntity } from './entities/message-log.entity';

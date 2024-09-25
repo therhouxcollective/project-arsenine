@@ -4,15 +4,15 @@ import { BaseDto } from './base.dto';
 
 export class BaseEntity implements BaseDto {
     @Index()
-    @PrimaryGeneratedColumn() 
+    @PrimaryGeneratedColumn()
     id: string;
 
-    @CreateDateColumn() 
+    @CreateDateColumn()
     createdDate: Date;
-    
-    @UpdateDateColumn() 
+
+    @UpdateDateColumn()
     modifiedDate: Date;
-    
-    @DeleteDateColumn() 
+
+    @DeleteDateColumn()
     deletedDate: Date;
 }

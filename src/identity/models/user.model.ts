@@ -10,6 +10,7 @@ export class UserDto extends BaseDto {
     @ApiProperty() public password: string;
 
 }
+
 export class LoginCredentials {
     @ApiProperty() public username: string;
     @ApiProperty() public password: string;

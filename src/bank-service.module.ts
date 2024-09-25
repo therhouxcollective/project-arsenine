@@ -8,7 +8,7 @@ import { BankingModule } from './banking/banking.module';
 import * as path from 'path';
 
 @Module({
-  imports: [IdentityModule, MessengerModule, BankingModule, ConfigModule.forRoot({
+  imports: [IdentityModule, BankingModule, ConfigModule.forRoot({
     envFilePath: path.resolve(__dirname, '.env'),
     isGlobal: true
   }), TypeOrmModule.forRootAsync({

@@ -6,23 +6,16 @@ import { AuthController } from './controller/auth.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
 import { LoginEntity } from './entities/login.entity';
+import { MessengerModule } from 'src/messenger/messenger.module';
 
 @Module({
   providers: [AuthService],
   imports: [
     ConfigModule,
+    MessengerModule,
     TypeOrmModule.forFeature([UserEntity, LoginEntity]),
-    ClientsModule.register([
-      {
-        name: 'banking',
-        transport: Transport.NATS,
-        options: {
-          servers: ['nats://localhost:4222'],
-          
-        }
-      },
-    ]),
+
   ],
   controllers: [AuthController],
 })
-export class IdentityModule {}
+export class IdentityModule { }

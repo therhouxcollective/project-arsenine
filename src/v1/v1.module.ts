@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import {V1Controller } from './controllers/v1/v1.controller';
 import { MessengerModule } from 'src/messenger/messenger.module';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { BankingGatewayService } from './services/banking/banking.service';
+import { BankingGatewayService } from './services/banking.service';
 
 @Module({
     imports: [ClientsModule.register([

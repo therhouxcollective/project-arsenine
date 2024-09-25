@@ -1,8 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { LoginCredentials, UserDto } from 'src/identity/models/user';
+import { LoginCredentials, UserDto } from 'src/identity/models/user.model';
 import { TransactionDto } from 'src/banking/models/banking';
-
+/**
+ * All of the functionality publish's a message to the MQ, to perform specific tasks
+ */
 @Injectable()
 export class BankingGatewayService {
     constructor(@Inject('banking') private readonly banking: ClientProxy,) {}
